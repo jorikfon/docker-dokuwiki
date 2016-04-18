@@ -9,6 +9,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
 
 ENV DOKUWIKI_VERSION 2015-08-10a
 ENV MD5_CHECKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
+ENV DOKUWIKI_NOTE_VERSION 20090615
 
 RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     cd /var/www && \
@@ -17,6 +18,10 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     tar xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 && \
     rm "dokuwiki-$DOKUWIKI_VERSION.tgz" && \
     git clone https://github.com/splitbrain/dokuwiki-plugin-disqus.git /var/www/lib/plugins/disqus && \
+    cd /var/www/lib/plugins/ && \
+    curl -O "http://gauret.free.fr/fichiers/dokuwiki/dokuwiki-note-$DOKUWIKI_NOTE_VERSION.tgz" && \
+    tar xzf "dokuwiki-note-$DOKUWIKI_NOTE_VERSION.tgz" --strip 1 && \
+    rm -rf dokuwiki-note-$DOKUWIKI_NOTE_VERSION.tgz && \
     mv /var/www/data/pages /var/dokuwiki-storage/data/pages && \
     ln -s /var/dokuwiki-storage/data/pages /var/www/data/pages && \
     mv /var/www/data/meta /var/dokuwiki-storage/data/meta && \
