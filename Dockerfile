@@ -20,7 +20,7 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     git clone https://github.com/splitbrain/dokuwiki-plugin-disqus.git /var/www/lib/plugins/disqus && \
     cd /var/www/lib/plugins/ && \
     curl -O "http://gauret.free.fr/fichiers/dokuwiki/dokuwiki-note-$DOKUWIKI_NOTE_VERSION.tgz" && \
-    tar xzf "dokuwiki-note-$DOKUWIKI_NOTE_VERSION.tgz" --strip 1 && \
+    tar xzf "dokuwiki-note-$DOKUWIKI_NOTE_VERSION.tgz" && \
     rm -rf dokuwiki-note-$DOKUWIKI_NOTE_VERSION.tgz && \
     mv /var/www/data/pages /var/dokuwiki-storage/data/pages && \
     ln -s /var/dokuwiki-storage/data/pages /var/www/data/pages && \
