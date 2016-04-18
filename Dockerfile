@@ -16,6 +16,10 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     echo "$MD5_CHECKSUM  dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - && \
     tar xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 && \
     rm "dokuwiki-$DOKUWIKI_VERSION.tgz" && \
+    curl -O -L "https://github.com/splitbrain/dokuwiki-plugin-disqus/archive/master.zip" && \
+    unzip master.zip -d /var/www/lib/plugins/ && \
+    mv /var/www/lib/plugins/dokuwiki-plugin-disqus-master /var/www/lib/plugins/disqus && \
+    rm -rf master.zip && \
     mv /var/www/data/pages /var/dokuwiki-storage/data/pages && \
     ln -s /var/dokuwiki-storage/data/pages /var/www/data/pages && \
     mv /var/www/data/meta /var/dokuwiki-storage/data/meta && \
