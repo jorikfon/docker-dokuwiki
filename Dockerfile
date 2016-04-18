@@ -1,10 +1,10 @@
 FROM ubuntu:14.04
-MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
+MAINTAINER Nikolay Beketov <nbek@miko.ru>
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
     echo 'deb http://ppa.launchpad.net/ondrej/php5/ubuntu trusty main' > /etc/apt/sources.list.d/ondrej-php5-trusty.list && \
     apt-get update && \
-    apt-get install -y supervisor nginx php5-fpm php5-gd curl && \
+    apt-get install -y supervisor nginx php5-fpm php5-gd php5-ldap curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV DOKUWIKI_VERSION 2015-08-10a
@@ -29,7 +29,12 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     mv /var/www/data/attic /var/dokuwiki-storage/data/attic && \
     ln -s /var/dokuwiki-storage/data/attic /var/www/data/attic && \
     mv /var/www/conf /var/dokuwiki-storage/conf && \
-    ln -s /var/dokuwiki-storage/conf /var/www/conf
+    ln -s /var/dokuwiki-storage/conf /var/www/conf && \
+    mkdir -p /var/dokuwiki-storage/images && \
+    mv /var/www/lib/plugins /var/dokuwiki-storage/plugins && \
+    ln -s /var/dokuwiki-storage/plugins /var/www/lib/plugins && \
+    mv /var/www/lib/tpl/dokuwiki/images/logo.png /var/dokuwiki-storage/images/logo.png && \
+    ln -s /var/dokuwiki-storage/images/logo.png /var/www/lib/tpl/dokuwiki/images/logo.png
 
 RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
