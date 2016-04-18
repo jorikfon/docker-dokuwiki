@@ -31,8 +31,6 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     mv /var/www/conf /var/dokuwiki-storage/conf && \
     ln -s /var/dokuwiki-storage/conf /var/www/conf && \
     mkdir -p /var/dokuwiki-storage/images && \
-    mv /var/www/lib/plugins /var/dokuwiki-storage/plugins && \
-    ln -s /var/dokuwiki-storage/plugins /var/www/lib/plugins && \
     mv /var/www/lib/tpl/dokuwiki/images/logo.png /var/dokuwiki-storage/images/logo.png && \
     ln -s /var/dokuwiki-storage/images/logo.png /var/www/lib/tpl/dokuwiki/images/logo.png
 
